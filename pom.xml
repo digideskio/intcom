@@ -59,6 +59,31 @@
             <version>1.18.0-rc</version>
             <type>jar</type>
         </dependency>
+    <dependency>
+        <groupId>com.google.api-client</groupId>
+        <artifactId>google-api-client-jackson2</artifactId>
+        <version>1.18.0-rc</version>
+    </dependency>   
+    <dependency>
+        <groupId>com.google.api-client</groupId>
+        <artifactId>google-api-client-xml</artifactId>
+        <version>1.18.0-rc</version>
+    </dependency>
+    <dependency>
+        <groupId>com.google.api-client</groupId>
+        <artifactId>google-api-client-protobuf</artifactId>
+        <version>1.18.0-rc</version>
+    </dependency>
+    <dependency>
+        <groupId>com.google.api-client</groupId>
+        <artifactId>google-api-client-java6</artifactId>
+        <version>1.18.0-rc</version>
+    </dependency>   
+    <dependency>
+        <groupId>com.google.api-client</groupId>
+        <artifactId>google-api-client-gson</artifactId>
+        <version>1.18.0-rc</version>
+    </dependency>                  
     </dependencies>
 
     <build>
