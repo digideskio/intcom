@@ -68,30 +68,35 @@ public class ExternalServlet extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             String JSONString = helper.getUserInfoJson(request.getParameter("code"));
             JSONArray rootOfPage =  new JSONArray(JSONString);
-            String email = rootOfPage.toString();
+            String email = rootOfPage.get(1).toString();
             try {
-                    Connection connect = DBConnection.getConnection();
-                    PreparedStatement preparedStatement = connect.prepareStatement("SELECT * FROM users where email = ? AND external = 1");
+                Connection connect = DBConnection.getConnection();
+                PreparedStatement preparedStatement = connect.prepareStatement("SELECT * FROM users where email = ? AND external = 1");
 
-                    preparedStatement.setString(1, email);
-                    ResultSet resultSet = preparedStatement.executeQuery();
-                    
-                    if (!resultSet.next()) {
-                        preparedStatement.close();
-                        connect.close();
-                        response.setContentType("text/html;charset=UTF-8");
-                        try (PrintWriter out = response.getWriter()) {
-                            /* TODO output your page here. You may use following sample code. */
-                            out.println(email);
-                        }
-                    }else{
-                        session.setAttribute("username", email);
-                        session.setAttribute("external", "1");
-                        response.sendRedirect("/sample/verysecret");
+                preparedStatement.setString(1, email);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (!resultSet.next()) {
+                    preparedStatement.close();
+                    connect.close();
+                    response.setContentType("text/html;charset=UTF-8");
+                    try (PrintWriter out = response.getWriter()) {
+                        /* TODO output your page here. You may use following sample code. */
+                        out.println(email);
                     }
-                } catch (Exception ex) {
-                    
+                }else{
+                    session.setAttribute("username", email);
+                    session.setAttribute("external", "1");
+                    response.sendRedirect("/sample/verysecret");
                 }
+            } catch (Exception ex) {
+                response.setContentType("text/html;charset=UTF-8");
+                try (PrintWriter out = response.getWriter()) {
+                    /* TODO output your page here. You may use following sample code. */
+                    out.println("EXCEPTION!<br />");
+                    ex.printStackTrace(out);
+                }
+            }
         }
     }
 
