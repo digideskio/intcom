@@ -21,6 +21,10 @@
         <servlet-name>TopsecretServlet</servlet-name>
         <servlet-class>nl.hu.v2iac1.secretpages.TopsecretServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TwostepServlet</servlet-name>
+        <servlet-class>nl.hu.v2iac1.login.TwostepServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -40,5 +44,9 @@
     <servlet-mapping>
         <servlet-name>TopsecretServlet</servlet-name>
         <url-pattern>/topsecret</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TwostepServlet</servlet-name>
+        <url-pattern>/twostep</url-pattern>
     </servlet-mapping>
 </web-app>

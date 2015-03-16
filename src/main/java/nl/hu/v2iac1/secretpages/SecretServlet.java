@@ -33,22 +33,26 @@ public class SecretServlet extends HttpServlet {
             throws ServletException, IOException {
         Configuration configuration = new Configuration();
         HttpSession session = request.getSession();
-    	String username = session.getAttribute("username").toString();
-    	String logintoken = session.getAttribute("logintoken").toString();
-        if(logintoken.equals("1")) {
-            response.setContentType("text/html;charset=UTF-8");
-            try (PrintWriter out = response.getWriter()) {
-                /* TODO output your page here. You may use following sample code. */
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Secret</title>");            
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Secret</h1>");
-                out.println("Hello "+username+", this is secret: "+ configuration.getValue(Configuration.Key.SECRET));
-                out.println("</body>");
-                out.println("</html>");
+        if(session.getAttribute("username") != null && session.getAttribute("logintoken") != null) {
+            String username = session.getAttribute("username").toString();
+            String logintoken = session.getAttribute("logintoken").toString();
+            if(logintoken.equals("1") && logintoken != null) {
+                response.setContentType("text/html;charset=UTF-8");
+                try (PrintWriter out = response.getWriter()) {
+                    /* TODO output your page here. You may use following sample code. */
+                    out.println("<!DOCTYPE html>");
+                    out.println("<html>");
+                    out.println("<head>");
+                    out.println("<title>Secret</title>");            
+                    out.println("</head>");
+                    out.println("<body>");
+                    out.println("<h1>Secret</h1>");
+                    out.println("Hello "+username+", this is secret: "+ configuration.getValue(Configuration.Key.SECRET));
+                    out.println("</body>");
+                    out.println("</html>");
+                }
+            }else{
+                response.sendRedirect("/sample/login?returnpage=secret");
             }
         }else{
             response.sendRedirect("/sample/login?returnpage=secret");

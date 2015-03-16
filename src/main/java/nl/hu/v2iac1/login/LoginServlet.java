@@ -114,15 +114,20 @@ public class LoginServlet extends HttpServlet {
                         if(returnPage.equals("secret")) {
                             response.sendRedirect("/sample/secret");
                         }else if(returnPage.equals("topsecret")) {
-                            response.sendRedirect("/sample/topsecret");
+                            response.sendRedirect("/sample/twostep?returnpage=topsecret");
                         }
                     }
                 } catch (Exception ex) {
-
+                    response.setContentType("text/html;charset=UTF-8");
+                    try (PrintWriter out = response.getWriter()) {
+                        /* TODO output your page here. You may use following sample code. */
+                        out.println("EXCEPTION!<br />");
+                        ex.printStackTrace(out);
+                    }
                 }
             }
         }
-        processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /**

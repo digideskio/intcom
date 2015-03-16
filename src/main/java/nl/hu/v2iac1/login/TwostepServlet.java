@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nl.hu.v2iac1.secretpages;
+package nl.hu.v2iac1.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,14 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import nl.hu.v2iac1.Configuration;
 
 /**
  *
  * @author Jelle
  */
-public class TopsecretServlet extends HttpServlet {
+public class TwostepServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,40 +29,18 @@ public class TopsecretServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Configuration configuration = new Configuration();
-        HttpSession session = request.getSession();
-        if(session.getAttribute("username") != null && session.getAttribute("logintoken") != null) {
-            String username = session.getAttribute("username").toString();
-            String logintoken = session.getAttribute("logintoken").toString();
-            if(logintoken.equals("1")) {
-                if(session.getAttribute("twosteptoken") != null) {
-                    String twosteptoken = session.getAttribute("twosteptoken").toString();
-                    if(twosteptoken.equals("1")) {
-                        response.setContentType("text/html;charset=UTF-8");
-                        try (PrintWriter out = response.getWriter()) {
-                            /* TODO output your page here. You may use following sample code. */
-                            out.println("<!DOCTYPE html>");
-                            out.println("<html>");
-                            out.println("<head>");
-                            out.println("<title>Secret</title>");            
-                            out.println("</head>");
-                            out.println("<body>");
-                            out.println("<h1>Secret</h1>");
-                            out.println("Hello "+username+", this is TOP secret: " + configuration.getValue(Configuration.Key.TOPSECRET));
-                            out.println("</body>");
-                            out.println("</html>");
-                        }
-                    }else{
-                        response.sendRedirect("/sample/twostep?returnpage=topsecret");
-                    }
-                }else{
-                    response.sendRedirect("/sample/twostep?returnpage=topsecret");
-                }
-            }else{
-                response.sendRedirect("/sample/login?returnpage=topsecret");
-            }
-        }else{
-            response.sendRedirect("/sample/login?returnpage=topsecret");
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet TwostepServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet TwostepServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
