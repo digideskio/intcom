@@ -12,8 +12,6 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.TEXT_PLAIN)
 public class SecretRestService extends AbstractRestService{
 
-
-
     @GET
     @Path("/")
     public Response getSecret() {
