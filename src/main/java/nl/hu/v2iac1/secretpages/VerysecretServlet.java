@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import nl.hu.v2iac1.Configuration;
 
 /**
  *
@@ -29,16 +30,18 @@ public class VerysecretServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Configuration configuration = new Configuration();
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet VerysecretServlet</title>");            
+            out.println("<title>Verysecret</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet VerysecretServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Verysecret</h1>");
+            out.println("This is very secret: " + configuration.getValue(Configuration.Key.VERYSECRET));
             out.println("</body>");
             out.println("</html>");
         }

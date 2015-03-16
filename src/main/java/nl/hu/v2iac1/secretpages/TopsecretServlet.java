@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import nl.hu.v2iac1.Configuration;
 
 /**
  *
@@ -29,18 +31,30 @@ public class TopsecretServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet TopsecretServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet TopsecretServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        Configuration configuration = new Configuration();
+        HttpSession session = request.getSession();
+    	String username = session.getAttribute("username").toString();
+    	String logintoken = session.getAttribute("logintoken").toString();
+    	String twosteptoken = session.getAttribute("twosteptoken").toString();
+        if(logintoken.equals("1") && twosteptoken.equals("1")) {
+            response.setContentType("text/html;charset=UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                /* TODO output your page here. You may use following sample code. */
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Secret</title>");            
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Secret</h1>");
+                out.println("Hello "+username+", this is TOP secret: " + configuration.getValue(Configuration.Key.TOPSECRET));
+                out.println("</body>");
+                out.println("</html>");
+            }
+        }else if(logintoken.equals("1")) {
+            response.sendRedirect("/sample/twostep?returnpage=topsecret");
+        }else{
+            response.sendRedirect("/sample/login?returnpage=topsecret");
         }
     }
 

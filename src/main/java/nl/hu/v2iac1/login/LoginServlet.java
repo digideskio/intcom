@@ -112,9 +112,9 @@ public class LoginServlet extends HttpServlet {
                         session.setAttribute("username", GivenUsername);
                         session.setAttribute("logintoken", "1");
                         if(returnPage.equals("secret")) {
-                            response.sendRedirect("/sample/rest/secret/");
+                            response.sendRedirect("/sample/secret");
                         }else if(returnPage.equals("topsecret")) {
-                            response.sendRedirect("/sample/rest/topsecret/");
+                            response.sendRedirect("/sample/topsecret");
                         }
                     }
                 } catch (Exception ex) {
