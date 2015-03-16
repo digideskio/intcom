@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.hu.v2iac1.login;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -28,22 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import nl.hu.v2iac1.Configuration;
 import nl.hu.v2iac1.mysql.MySQLConnection;
-
-/**
- *
- * @author Jelle
- */
 public class TwostepServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
@@ -51,7 +30,6 @@ public class TwostepServlet extends HttpServlet {
         String returnPage = request.getParameter("returnpage");
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -76,7 +54,6 @@ public class TwostepServlet extends HttpServlet {
         String returnPage = request.getParameter("returnpage");
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -93,16 +70,6 @@ public class TwostepServlet extends HttpServlet {
             out.println("</html>");
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -121,15 +88,6 @@ public class TwostepServlet extends HttpServlet {
             response.sendRedirect("/sample/login?returnpage="+returnPage);
         }
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -148,11 +106,9 @@ public class TwostepServlet extends HttpServlet {
                         if(session.getAttribute("sendCode") == null) {
                             String email = request.getParameter("email").toString();
                             PreparedStatement preparedStatement = connect.prepareStatement("SELECT * FROM users where username = ? AND email = ? AND twostep = 1");
-
                             preparedStatement.setString(1, username);
                             preparedStatement.setString(2, email);
                             ResultSet resultSet = preparedStatement.executeQuery();
-
                             if (!resultSet.next()) {
                                 preparedStatement.close();
                                 connect.close();
@@ -169,8 +125,7 @@ public class TwostepServlet extends HttpServlet {
                                 Session mailsession = Session.getDefaultInstance(props, null);
                                 Message msg = new MimeMessage(mailsession);
                                 msg.setFrom(new InternetAddress("no-reply@yuno.jelleluteijn.nl", "jelleluteijn.com tomcat"));
-                                msg.addRecipient(Message.RecipientType.TO,
-                                                 new InternetAddress(email, username));
+                                msg.addRecipient(Message.RecipientType.TO, new InternetAddress(email, username));
                                 msg.setSubject("Jouw inlog sleutel");
                                 msg.setText("Hier is jouw inlog code: "+randomcode);
                                 Transport.send(msg);
@@ -181,10 +136,8 @@ public class TwostepServlet extends HttpServlet {
                         }else{
                             String code = request.getParameter("code").toString();
                             PreparedStatement preparedStatement = connect.prepareStatement("SELECT * FROM users where username = ? AND twostep = 1");
-
                             preparedStatement.setString(1, username);
                             ResultSet resultSet = preparedStatement.executeQuery();
-
                             if (!resultSet.next()) {
                                 preparedStatement.close();
                                 connect.close();
@@ -221,13 +174,11 @@ public class TwostepServlet extends HttpServlet {
                     } catch (Exception ex) {
                         response.setContentType("text/html;charset=UTF-8");
                         try (PrintWriter out = response.getWriter()) {
-                            /* TODO output your page here. You may use following sample code. */
                             out.println("EXCEPTION!<br />");
                             ex.printStackTrace(out);
                         }
                     }
                 }
-                
             }else{
                 response.sendRedirect("/sample/login?returnpage=secret");
             }
@@ -235,15 +186,8 @@ public class TwostepServlet extends HttpServlet {
             response.sendRedirect("/sample/login?returnpage=secret");
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }
