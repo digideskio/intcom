@@ -172,11 +172,6 @@ public class TwostepServlet extends HttpServlet {
                             }
                         }
                     } catch (Exception ex) {
-                        response.setContentType("text/html;charset=UTF-8");
-                        try (PrintWriter out = response.getWriter()) {
-                            out.println("EXCEPTION!<br />");
-                            ex.printStackTrace(out);
-                        }
                     }
                 }
             }else{
