@@ -25,6 +25,10 @@
         <servlet-name>TwostepServlet</servlet-name>
         <servlet-class>nl.hu.v2iac1.login.TwostepServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ExternalServlet</servlet-name>
+        <servlet-class>nl.hu.v2iac1.login.ExternalServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -48,5 +52,9 @@
     <servlet-mapping>
         <servlet-name>TwostepServlet</servlet-name>
         <url-pattern>/twostep</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExternalServlet</servlet-name>
+        <url-pattern>/ExternalServlet</url-pattern>
     </servlet-mapping>
 </web-app>
