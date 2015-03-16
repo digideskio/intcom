@@ -12,7 +12,7 @@ import java.util.Properties;
  */
 public class Configuration {
     public enum Key {
-        PUBLIC, SECRET, TOPSECRET, VERYSECRET, DBHOST, DBUSER, DBNAME, DBPASS
+        PUBLIC, SECRET, TOPSECRET, VERYSECRET, DBHOST, DBUSER, DBNAME, DBPASS, CLIENT_ID, CLIENT_SECRET
     }
 
     private final static String propFileName = "local.properties";
