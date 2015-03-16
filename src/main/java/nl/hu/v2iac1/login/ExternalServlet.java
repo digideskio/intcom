@@ -5,21 +5,19 @@
  */
 package nl.hu.v2iac1.login;
 
-import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
-import com.google.api.client.extensions.servlet.auth.oauth2.AbstractAuthorizationCodeServlet;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.jackson2.JacksonFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collections;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import nl.hu.v2iac1.Configuration;
+import nl.hu.v2iac1.mysql.MySQLConnection;
+import org.json.JSONArray;
 
 /**
  *
@@ -38,6 +36,7 @@ public class ExternalServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        MySQLConnection DBConnection = new MySQLConnection();
         HttpSession session = request.getSession();
         GoogleAuthHelper helper = new GoogleAuthHelper();
         if (request.getParameter("code") == null
@@ -67,10 +66,32 @@ public class ExternalServlet extends HttpServlet {
              * At this point you should parse and persist the info.
              */
             response.setContentType("text/html;charset=UTF-8");
-            try (PrintWriter out = response.getWriter()) {
-                /* TODO output your page here. You may use following sample code. */
-                out.println(helper.getUserInfoJson(request.getParameter("code")));
-            }
+            String JSONString = helper.getUserInfoJson(request.getParameter("code"));
+            JSONArray rootOfPage =  new JSONArray(JSONString);
+            String email = rootOfPage.toString();
+            try {
+                    Connection connect = DBConnection.getConnection();
+                    PreparedStatement preparedStatement = connect.prepareStatement("SELECT * FROM users where email = ? AND external = 1");
+
+                    preparedStatement.setString(1, email);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    
+                    if (!resultSet.next()) {
+                        preparedStatement.close();
+                        connect.close();
+                        response.setContentType("text/html;charset=UTF-8");
+                        try (PrintWriter out = response.getWriter()) {
+                            /* TODO output your page here. You may use following sample code. */
+                            out.println(email);
+                        }
+                    }else{
+                        session.setAttribute("username", email);
+                        session.setAttribute("external", "1");
+                        response.sendRedirect("/sample/verysecret");
+                    }
+                } catch (Exception ex) {
+                    
+                }
         }
     }
 
