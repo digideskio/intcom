@@ -18,6 +18,22 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>nl.hu.v2iac1.login.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PublicServlet</servlet-name>
+        <servlet-class>nl.hu.v2iac1.secretpages.PublicServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SecretServlet</servlet-name>
+        <servlet-class>nl.hu.v2iac1.secretpages.SecretServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerysecretServlet</servlet-name>
+        <servlet-class>nl.hu.v2iac1.secretpages.VerysecretServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TopsecretServlet</servlet-name>
+        <servlet-class>nl.hu.v2iac1.secretpages.TopsecretServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>V2IAC1-14 Web Application</servlet-name>
         <url-pattern>/rest/*</url-pattern>
@@ -25,5 +41,21 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PublicServlet</servlet-name>
+        <url-pattern>/public</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SecretServlet</servlet-name>
+        <url-pattern>/secret</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerysecretServlet</servlet-name>
+        <url-pattern>/verysecret</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TopsecretServlet</servlet-name>
+        <url-pattern>/topsecret</url-pattern>
     </servlet-mapping>
 </web-app>
