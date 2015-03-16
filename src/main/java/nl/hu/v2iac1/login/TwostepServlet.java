@@ -10,6 +10,9 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Properties;
 import java.util.UUID;
 import javax.mail.Message;
@@ -176,7 +179,44 @@ public class TwostepServlet extends HttpServlet {
                                 connect.close();
                             }
                         }else{
-                            
+                            String code = request.getParameter("code").toString();
+                            PreparedStatement preparedStatement = connect.prepareStatement("SELECT * FROM users where username = ? AND twostep = 1");
+
+                            preparedStatement.setString(1, username);
+                            ResultSet resultSet = preparedStatement.executeQuery();
+
+                            if (!resultSet.next()) {
+                                preparedStatement.close();
+                                connect.close();
+                                processRequest(request, response);
+                            }else{
+                                String userid = resultSet.getString("id");
+                                preparedStatement.close();
+                                String randomcode = UUID.randomUUID().toString();
+                                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                Calendar cal = Calendar.getInstance();
+                                cal.add(Calendar.MINUTE, -5);
+                                preparedStatement = connect.prepareStatement("SELECT * FROM login_tokens WHERE userid = ? AND token = ? AND usedkey = 0 AND created > ?");
+                                preparedStatement.setString(1, userid);
+                                preparedStatement.setString(2, code);
+                                preparedStatement.setString(3, dateFormat.format(cal.getTime()));
+                                resultSet = preparedStatement.executeQuery();
+                                if (!resultSet.next()) {
+                                    preparedStatement.close();
+                                    connect.close();
+                                    processCodeRequest(request, response);
+                                }else{
+                                    preparedStatement.close();
+                                    preparedStatement = connect.prepareStatement("UPDATE login_tokens SET usedkey = 1  WHERE userid = ? AND token = ?");
+                                    preparedStatement.setString(1, userid);
+                                    preparedStatement.setString(2, code);
+                                    preparedStatement.executeUpdate();
+                                    session.setAttribute("twosteptoken", "1");
+                                    connect.close();
+                                    response.sendRedirect("/sample/topsecret");
+                                }
+                                connect.close();
+                            }
                         }
                     } catch (Exception ex) {
                         response.setContentType("text/html;charset=UTF-8");
