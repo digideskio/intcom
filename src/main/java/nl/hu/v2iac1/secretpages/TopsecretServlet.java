@@ -46,10 +46,10 @@ public class TopsecretServlet extends HttpServlet {
                             out.println("<!DOCTYPE html>");
                             out.println("<html>");
                             out.println("<head>");
-                            out.println("<title>Secret</title>");            
+                            out.println("<title>TOPSecret</title>");            
                             out.println("</head>");
                             out.println("<body>");
-                            out.println("<h1>Secret</h1>");
+                            out.println("<h1>TOPSecret</h1>");
                             out.println("Hello "+username+", this is TOP secret: " + configuration.getValue(Configuration.Key.TOPSECRET));
                             out.println("</body>");
                             out.println("</html>");
