@@ -20,7 +20,7 @@ public class PublicServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Public</h1>");
-            out.println("This is public: "+ configuration.getValue(Configuration.Key.PUBLIC));
+            out.println("This is public:<br />"+ configuration.getValue(Configuration.Key.PUBLIC));
             out.println("</body>");
             out.println("</html>");
         }

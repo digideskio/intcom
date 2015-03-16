@@ -25,7 +25,7 @@ public class VerysecretServlet extends HttpServlet {
                     out.println("</head>");
                     out.println("<body>");
                     out.println("<h1>Verysecret</h1>");
-                    out.println("This is very secret: " + configuration.getValue(Configuration.Key.VERYSECRET));
+                    out.println("This is very secret:<br />" + configuration.getValue(Configuration.Key.VERYSECRET));
                     out.println("</body>");
                     out.println("</html>");
                 }

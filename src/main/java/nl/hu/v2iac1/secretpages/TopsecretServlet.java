@@ -28,7 +28,7 @@ public class TopsecretServlet extends HttpServlet {
                             out.println("</head>");
                             out.println("<body>");
                             out.println("<h1>TOPSecret</h1>");
-                            out.println("Hello "+username+", this is TOP secret: " + configuration.getValue(Configuration.Key.TOPSECRET));
+                            out.println("Hello "+username+", this is TOP secret:<br />" + configuration.getValue(Configuration.Key.TOPSECRET));
                             out.println("</body>");
                             out.println("</html>");
                         }

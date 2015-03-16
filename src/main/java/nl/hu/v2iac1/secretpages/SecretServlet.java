@@ -25,7 +25,7 @@ public class SecretServlet extends HttpServlet {
                     out.println("</head>");
                     out.println("<body>");
                     out.println("<h1>Secret</h1>");
-                    out.println("Hello "+username+", this is secret: "+ configuration.getValue(Configuration.Key.SECRET));
+                    out.println("Hello "+username+", this is secret:<br />"+ configuration.getValue(Configuration.Key.SECRET));
                     out.println("</body>");
                     out.println("</html>");
                 }
