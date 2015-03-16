@@ -74,7 +74,7 @@ public final class GoogleAuthHelper {
 		
 		final GoogleAuthorizationCodeRequestUrl url = flow.newAuthorizationUrl();
 		
-		return url.setState(stateToken).build();
+		return url.setRedirectUri(CALLBACK_URI).setState(stateToken).build();
 	}
 	
 	/**
