@@ -55,6 +55,6 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ExternalServlet</servlet-name>
-        <url-pattern>/ExternalServlet</url-pattern>
+        <url-pattern>/external</url-pattern>
     </servlet-mapping>
 </web-app>
