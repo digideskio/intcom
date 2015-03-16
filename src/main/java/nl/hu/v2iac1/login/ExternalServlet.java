@@ -15,9 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import nl.hu.v2iac1.Configuration;
 import nl.hu.v2iac1.mysql.MySQLConnection;
-import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -65,10 +64,9 @@ public class ExternalServlet extends HttpServlet {
              * the json representation of the authenticated user's information. 
              * At this point you should parse and persist the info.
              */
-            response.setContentType("text/html;charset=UTF-8");
             String JSONString = helper.getUserInfoJson(request.getParameter("code"));
-            JSONArray rootOfPage =  new JSONArray(JSONString);
-            String email = rootOfPage.get(1).toString();
+            JSONObject rootOfPage =  new JSONObject(JSONString);
+            String email = rootOfPage.get("email").toString();
             try {
                 Connection connect = DBConnection.getConnection();
                 PreparedStatement preparedStatement = connect.prepareStatement("SELECT * FROM users where email = ? AND external = 1");
@@ -86,7 +84,7 @@ public class ExternalServlet extends HttpServlet {
                     }
                 }else{
                     session.setAttribute("username", email);
-                    session.setAttribute("external", "1");
+                    session.setAttribute("externaltoken", "1");
                     response.sendRedirect("/sample/verysecret");
                 }
             } catch (Exception ex) {
