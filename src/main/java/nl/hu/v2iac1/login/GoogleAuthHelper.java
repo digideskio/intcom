@@ -18,7 +18,7 @@ import nl.hu.v2iac1.Configuration;
 public final class GoogleAuthHelper {
     private static String CLIENT_ID = "YOUR ID HERE";
     private static String CLIENT_SECRET = "SUPER SECRET SAUCE";
-    private static final String CALLBACK_URI = "http://tomcat.jelleluteijn.com/sample/external";
+    private static final String CALLBACK_URI = "http://tomcat.jelleluteijn.com/intcom/external";
     private static final List<String> SCOPE = Arrays.asList("https://www.googleapis.com/auth/userinfo.profile;https://www.googleapis.com/auth/userinfo.email".split(";"));
     private static final String USER_INFO_URL = "https://www.googleapis.com/oauth2/v1/userinfo";
     private static final JsonFactory JSON_FACTORY = new JacksonFactory();

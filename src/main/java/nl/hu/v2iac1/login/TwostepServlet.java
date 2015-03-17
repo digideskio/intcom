@@ -82,10 +82,10 @@ public class TwostepServlet extends HttpServlet {
             if(logintoken.equals("1") && logintoken != null) {
                 processRequest(request, response);
             }else{
-                response.sendRedirect("/sample/login?returnpage="+returnPage);
+                response.sendRedirect("/intcom/login?returnpage="+returnPage);
             }
         }else{
-            response.sendRedirect("/sample/login?returnpage="+returnPage);
+            response.sendRedirect("/intcom/login?returnpage="+returnPage);
         }
     }
     @Override
@@ -166,7 +166,7 @@ public class TwostepServlet extends HttpServlet {
                                     preparedStatement.executeUpdate();
                                     session.setAttribute("twosteptoken", "1");
                                     connect.close();
-                                    response.sendRedirect("/sample/topsecret");
+                                    response.sendRedirect("/intcom/topsecret");
                                 }
                                 connect.close();
                             }
@@ -175,10 +175,10 @@ public class TwostepServlet extends HttpServlet {
                     }
                 }
             }else{
-                response.sendRedirect("/sample/login?returnpage=secret");
+                response.sendRedirect("/intcom/login?returnpage=secret");
             }
         }else{
-            response.sendRedirect("/sample/login?returnpage=secret");
+            response.sendRedirect("/intcom/login?returnpage=secret");
         }
     }
     @Override

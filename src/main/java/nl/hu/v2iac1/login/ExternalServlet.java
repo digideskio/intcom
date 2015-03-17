@@ -36,11 +36,11 @@ public class ExternalServlet extends HttpServlet {
                 if (!resultSet.next()) {
                     preparedStatement.close();
                     connect.close();
-                    response.sendRedirect("/sample/");
+                    response.sendRedirect("/intcom/");
                 }else{
                     session.setAttribute("username", email);
                     session.setAttribute("externaltoken", "1");
-                    response.sendRedirect("/sample/verysecret");
+                    response.sendRedirect("/intcom/verysecret");
                 }
             } catch (Exception ex) {
                 

@@ -30,10 +30,10 @@ public class SecretServlet extends HttpServlet {
                     out.println("</html>");
                 }
             }else{
-                response.sendRedirect("/sample/login?returnpage=secret");
+                response.sendRedirect("/intcom/login?returnpage=secret");
             }
         }else{
-            response.sendRedirect("/sample/login?returnpage=secret");
+            response.sendRedirect("/intcom/login?returnpage=secret");
         }
     }
     @Override

@@ -18,10 +18,10 @@ public class IndexServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Secrets!</h1>");
             out.println("<ul>");
-            out.println("<li>Deze <a href=\"/sample/public\">link</a> mag publiek zijn.</li>");
-            out.println("<li>Deze <a href=\"/sample/secret\">link</a> moet met een username/password beveiligd worden. (+3 pt)</li>");
-            out.println("<li>Deze <a href=\"/sample/verysecret\">link</a> moet via een externe identity provider beveiligd worden. (+3 pt)</li>");
-            out.println("<li>Deze <a href=\"/sample/topsecret\">link</a> moet met two-factor authenticatie beveiligd worden. (+3 pt)</li>");
+            out.println("<li>Deze <a href=\"/intcom/public\">link</a> mag publiek zijn.</li>");
+            out.println("<li>Deze <a href=\"/intcom/secret\">link</a> moet met een username/password beveiligd worden. (+3 pt)</li>");
+            out.println("<li>Deze <a href=\"/intcom/verysecret\">link</a> moet via een externe identity provider beveiligd worden. (+3 pt)</li>");
+            out.println("<li>Deze <a href=\"/intcom/topsecret\">link</a> moet met two-factor authenticatie beveiligd worden. (+3 pt)</li>");
             out.println("</ul>");
             out.println("<a href=\"https://github.com/zydronium/intcom\" target=\"_blank\">Hier is de source code van deze site</a>");
             out.println("</body>");

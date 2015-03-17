@@ -30,10 +30,10 @@ public class VerysecretServlet extends HttpServlet {
                     out.println("</html>");
                 }
             }else{
-                response.sendRedirect("/sample/external");
+                response.sendRedirect("/intcom/external");
             }
         }else{
-            response.sendRedirect("/sample/external");
+            response.sendRedirect("/intcom/external");
         }
     }
     @Override

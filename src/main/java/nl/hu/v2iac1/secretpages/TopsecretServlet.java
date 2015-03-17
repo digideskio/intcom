@@ -33,16 +33,16 @@ public class TopsecretServlet extends HttpServlet {
                             out.println("</html>");
                         }
                     }else{
-                        response.sendRedirect("/sample/twostep?returnpage=topsecret");
+                        response.sendRedirect("/intcom/twostep?returnpage=topsecret");
                     }
                 }else{
-                    response.sendRedirect("/sample/twostep?returnpage=topsecret");
+                    response.sendRedirect("/intcom/twostep?returnpage=topsecret");
                 }
             }else{
-                response.sendRedirect("/sample/login?returnpage=topsecret");
+                response.sendRedirect("/intcom/login?returnpage=topsecret");
             }
         }else{
-            response.sendRedirect("/sample/login?returnpage=topsecret");
+            response.sendRedirect("/intcom/login?returnpage=topsecret");
         }
     }
     @Override
