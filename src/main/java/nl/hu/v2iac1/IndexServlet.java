@@ -23,7 +23,7 @@ public class IndexServlet extends HttpServlet {
             out.println("<li>Deze <a href=\"/intcom/verysecret\">link</a> moet via een externe identity provider beveiligd worden. (+3 pt)</li>");
             out.println("<li>Deze <a href=\"/intcom/topsecret\">link</a> moet met two-factor authenticatie beveiligd worden. (+3 pt)</li>");
             out.println("</ul>");
-            out.println("<a href=\"https://github.com/zydronium/intcom\" target=\"_blank\">Hier is de source code van deze site</a>");
+            out.println("<a href=\"https://github.com/zydronium/intcom\" target=\"_blank\">Hier is de source code van deze site</a>dfdf");
             out.println("</body>");
             out.println("</html>");
         }
